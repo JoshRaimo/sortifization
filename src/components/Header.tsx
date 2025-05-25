@@ -6,7 +6,7 @@ const Header: React.FC = () => {
     <div className="flex items-center space-x-3">
       <BarChartBigIcon className="h-8 w-8 text-blue-500" />
       <h1 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-        SortVision
+        Sortification
       </h1>
     </div>
   );
