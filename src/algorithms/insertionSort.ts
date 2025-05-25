@@ -29,7 +29,7 @@ export const insertionSort = (array: ArrayBar[]): SortingStep[] => {
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Inserting element ${key} at position ${i} into the sorted portion of the array`
+      description: `Inserting element at position ${i} into the sorted portion of the array`
     });
     
     // Compare with each element in the sorted array
@@ -38,7 +38,7 @@ export const insertionSort = (array: ArrayBar[]): SortingStep[] => {
       
       steps.push({
         array: createArraySnapshot(array),
-        description: `Comparing ${array[j].value} with ${key}. Since ${array[j].value} > ${key}, we need to shift it right`
+        description: `Comparing with element at position ${j}, shifting if needed`
       });
       
       // Shift elements
@@ -65,7 +65,7 @@ export const insertionSort = (array: ArrayBar[]): SortingStep[] => {
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Placed ${key} at its correct position in the sorted array`
+      description: `Placed element at its correct position in the sorted array`
     });
   }
   

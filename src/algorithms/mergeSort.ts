@@ -112,7 +112,7 @@ const merge = (
       
       steps.push({
         array: createArraySnapshot(array),
-        description: `Placing element ${leftArray[i].value} from left subarray at position ${k}`
+        description: `Placing element from left subarray at position ${k}`
       });
       
       i++;
@@ -122,7 +122,7 @@ const merge = (
       
       steps.push({
         array: createArraySnapshot(array),
-        description: `Placing element ${rightArray[j].value} from right subarray at position ${k}`
+        description: `Placing element from right subarray at position ${k}`
       });
       
       j++;
@@ -140,7 +140,7 @@ const merge = (
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Placing remaining element ${leftArray[i].value} from left subarray at position ${k}`
+      description: `Placing remaining element from left subarray at position ${k}`
     });
     
     array[k].state = 'default';
@@ -155,7 +155,7 @@ const merge = (
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Placing remaining element ${rightArray[j].value} from right subarray at position ${k}`
+      description: `Placing remaining element from right subarray at position ${k}`
     });
     
     array[k].state = 'default';

@@ -29,7 +29,7 @@ export const heapSort = (array: ArrayBar[]): SortingStep[] => {
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Swapping root (max element) ${array[0].value} with last unsorted element ${array[i].value}`
+      description: `Swapping root (max element) with last unsorted element`
     });
     
     // Swap
@@ -43,7 +43,7 @@ export const heapSort = (array: ArrayBar[]): SortingStep[] => {
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Element ${array[i].value} is now in its correct sorted position at index ${i}`
+      description: `Element is now in its correct sorted position at index ${i}`
     });
     
     // Call heapify on the reduced heap
@@ -85,7 +85,7 @@ const heapify = (
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Comparing left child ${array[left].value} at index ${left} with current largest ${array[largest].value} at index ${largest}`
+      description: `Comparing left child at index ${left} with current largest element`
     });
     
     if (array[left].value > array[largest].value) {
@@ -97,7 +97,7 @@ const heapify = (
       
       steps.push({
         array: createArraySnapshot(array),
-        description: `Left child is larger, new largest is at index ${largest} with value ${array[largest].value}`
+        description: `Left child is larger, new largest is at index ${largest}`
       });
     }
     
@@ -112,7 +112,7 @@ const heapify = (
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Comparing right child ${array[right].value} at index ${right} with current largest ${array[largest].value} at index ${largest}`
+      description: `Comparing right child at index ${right} with current largest element`
     });
     
     if (array[right].value > array[largest].value) {
@@ -124,7 +124,7 @@ const heapify = (
       
       steps.push({
         array: createArraySnapshot(array),
-        description: `Right child is larger, new largest is at index ${largest} with value ${array[largest].value}`
+        description: `Right child is larger, new largest is at index ${largest}`
       });
     }
     
@@ -140,7 +140,7 @@ const heapify = (
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Swapping root ${array[rootIndex].value} with largest ${array[largest].value}`
+      description: `Swapping root with largest element`
     });
     
     // Swap

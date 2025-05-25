@@ -27,7 +27,7 @@ export const selectionSort = (array: ArrayBar[]): SortingStep[] => {
       
       steps.push({
         array: createArraySnapshot(array),
-        description: `Comparing ${array[j].value} with current minimum ${array[minIdx].value}`
+        description: `Comparing with current minimum element`
       });
       
       if (array[j].value < array[minIdx].value) {
@@ -41,7 +41,7 @@ export const selectionSort = (array: ArrayBar[]): SortingStep[] => {
         
         steps.push({
           array: createArraySnapshot(array),
-          description: `Found new minimum value ${array[minIdx].value} at position ${minIdx}`
+          description: `Found new minimum element at position ${minIdx}`
         });
       } else {
         array[j].state = 'default';
@@ -55,7 +55,7 @@ export const selectionSort = (array: ArrayBar[]): SortingStep[] => {
       
       steps.push({
         array: createArraySnapshot(array),
-        description: `Swapping minimum value ${array[minIdx].value} at position ${minIdx} with element at position ${i}`
+        description: `Swapping minimum element at position ${minIdx} with element at position ${i}`
       });
       
       // Perform swap

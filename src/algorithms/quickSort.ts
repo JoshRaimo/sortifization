@@ -62,7 +62,7 @@ const partition = (
   
   steps.push({
     array: createArraySnapshot(array),
-    description: `Selected pivot: ${pivotValue} at position ${high}`
+    description: `Selected pivot at position ${high}`
   });
   
   // Index of smaller element
@@ -93,7 +93,7 @@ const partition = (
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Comparing element ${array[j].value} at position ${j} with pivot ${pivotValue}`
+      description: `Comparing element at position ${j} with pivot`
     });
     
     // If current element is smaller than or equal to pivot
@@ -106,7 +106,7 @@ const partition = (
         
         steps.push({
           array: createArraySnapshot(array),
-          description: `Swapping ${array[i].value} at position ${i} with ${array[j].value} at position ${j}`
+          description: `Swapping elements at positions ${i} and ${j}`
         });
         
         const temp = { ...array[i] };
@@ -115,7 +115,7 @@ const partition = (
       } else {
         steps.push({
           array: createArraySnapshot(array),
-          description: `Element ${array[j].value} at position ${j} is already in the correct partition`
+          description: `Element at position ${j} is already in the correct partition`
         });
       }
       
@@ -131,7 +131,7 @@ const partition = (
     
     steps.push({
       array: createArraySnapshot(array),
-      description: `Swapping ${array[i + 1].value} at position ${i + 1} with pivot ${pivotValue} at position ${high}`
+      description: `Swapping element at position ${i + 1} with pivot`
     });
     
     const temp = { ...array[i + 1] };
@@ -146,7 +146,7 @@ const partition = (
   
   steps.push({
     array: createArraySnapshot(array),
-    description: `Pivot ${pivotValue} is now in its final sorted position at index ${i + 1}`
+    description: `Pivot is now in its final sorted position at index ${i + 1}`
   });
   
   return i + 1;

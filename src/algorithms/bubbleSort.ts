@@ -36,12 +36,12 @@ export const bubbleSort = (array: ArrayBar[]): SortingStep[] => {
         
         steps.push({
           array: createArraySnapshot(array),
-          description: `Swapped elements at positions ${j} and ${j + 1} because ${array[j].value} < ${array[j + 1].value}`
+          description: `Swapped elements at positions ${j} and ${j + 1}`
         });
       } else {
         steps.push({
           array: createArraySnapshot(array),
-          description: `No swap needed as elements are already in order: ${array[j].value} <= ${array[j + 1].value}`
+          description: `No swap needed as elements are already in order`
         });
       }
       
