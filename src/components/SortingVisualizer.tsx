@@ -22,8 +22,8 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
   const [currentStep, setCurrentStep] = useState(0);
   const [steps, setSteps] = useState<SortingStep[]>([]);
   const [stepDescription, setStepDescription] = useState('');
-  const [showValues, setShowValues] = useState(true);
-  
+
+
   const sortingTimeoutRef = useRef<number | null>(null);
 
   // Generate a new random array when component mounts or arraySize changes
@@ -33,7 +33,9 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
 
   // Reset the animation when algorithm changes
   useEffect(() => {
-    resetArray();
+    if (!isSorting) {
+      resetArray();
+    }
   }, [algorithm]);
 
   // Handle the sorting animation
@@ -42,13 +44,13 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
       const step = steps[currentStep];
       setArray(step.array);
       setStepDescription(step.description);
-      
+
       const timeout = setTimeout(() => {
         setCurrentStep(prev => prev + 1);
       }, 1000 - speed * 9);
-      
+
       sortingTimeoutRef.current = timeout as unknown as number;
-      
+
       return () => {
         if (sortingTimeoutRef.current !== null) {
           clearTimeout(sortingTimeoutRef.current);
@@ -69,7 +71,7 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
       setIsSorting(false);
       setIsPaused(false);
     }
-    
+
     const newArray = generateRandomArray(arraySize);
     setArray(newArray);
     setSteps([]);
@@ -82,9 +84,9 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
       setIsPaused(!isPaused);
       return;
     }
-    
+
     let sortingSteps: SortingStep[] = [];
-    
+
     switch (algorithm) {
       case 'bubble':
         sortingSteps = bubbleSort([...array]);
@@ -107,7 +109,7 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
       default:
         sortingSteps = bubbleSort([...array]);
     }
-    
+
     setSteps(sortingSteps);
     setCurrentStep(0);
     setIsSorting(true);
@@ -201,18 +203,9 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
           >
             Step Forward
           </button>
-          <button
-            onClick={() => setShowValues(!showValues)}
-            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors
-              ${darkMode 
-                ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                : 'bg-gray-200 hover:bg-gray-300 text-gray-800'}`}
-          >
-            {showValues ? 'Hide Values' : 'Show Values'}
-          </button>
         </div>
       </div>
-      
+
       <div className="flex flex-wrap gap-4 mb-6">
         <div className="flex-1 min-w-[250px]">
           <label className="block text-sm font-medium mb-1">Array Size: {arraySize}</label>
@@ -238,40 +231,28 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
           />
         </div>
       </div>
-      
+
       {stepDescription && (
         <div className={`p-3 mb-4 rounded-lg text-sm ${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
           {stepDescription}
         </div>
       )}
-      
+
       <div className="h-64 sm:h-80 md:h-96 flex items-end justify-center border-b border-l relative">
         <div className="absolute bottom-0 left-0 w-full h-full flex items-end">
           {array.map((bar, index) => (
             <div
               key={index}
-              className="relative flex-1 flex flex-col items-center"
-            >
-              <div
-                className={`w-full ${getBarColor(bar.state)} transition-all duration-200`}
-                style={{
-                  height: `${(bar.value / 100) * 100}%`,
-                  marginRight: array.length > 60 ? 0 : 1
-                }}
-              >
-                {showValues && array.length <= 50 && (
-                  <div 
-                    className={`absolute w-full text-center -top-6 text-xs ${darkMode ? 'text-white' : 'text-gray-600'}`}
-                  >
-                    {bar.value}
-                  </div>
-                )}
-              </div>
-            </div>
+              className={`w-full ${getBarColor(bar.state)} transition-all duration-200`}
+              style={{
+                height: `${(bar.value / 100) * 100}%`,
+                marginRight: array.length > 60 ? 0 : 1
+              }}
+            ></div>
           ))}
         </div>
       </div>
-      
+
       <div className="flex justify-center mt-4 gap-4">
         <div className="flex items-center">
           <div className="w-4 h-4 bg-blue-500 mr-2"></div>
