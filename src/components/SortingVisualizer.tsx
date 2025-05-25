@@ -33,9 +33,17 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
 
   // Reset the animation when algorithm changes
   useEffect(() => {
-    if (!isSorting) {
-      resetArray();
+    if (isSorting) {
+      if (sortingTimeoutRef.current !== null) {
+        clearTimeout(sortingTimeoutRef.current);
+      }
+      setIsSorting(false);
+      setIsPaused(false);
+      setCurrentStep(0);
+      setSteps([]);
+      setStepDescription('');
     }
+    resetArray();
   }, [algorithm]);
 
   // Handle the sorting animation
