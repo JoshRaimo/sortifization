@@ -22,6 +22,7 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
   const [currentStep, setCurrentStep] = useState(0);
   const [steps, setSteps] = useState<SortingStep[]>([]);
   const [stepDescription, setStepDescription] = useState('');
+  const [showValues, setShowValues] = useState(true);
   
   const sortingTimeoutRef = useRef<number | null>(null);
 
@@ -32,9 +33,7 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
 
   // Reset the animation when algorithm changes
   useEffect(() => {
-    if (!isSorting) {
-      resetArray();
-    }
+    resetArray();
   }, [algorithm]);
 
   // Handle the sorting animation
@@ -202,6 +201,15 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
           >
             Step Forward
           </button>
+          <button
+            onClick={() => setShowValues(!showValues)}
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors
+              ${darkMode 
+                ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                : 'bg-gray-200 hover:bg-gray-300 text-gray-800'}`}
+          >
+            {showValues ? 'Hide Values' : 'Show Values'}
+          </button>
         </div>
       </div>
       
@@ -242,12 +250,24 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
           {array.map((bar, index) => (
             <div
               key={index}
-              className={`w-full ${getBarColor(bar.state)} transition-all duration-200`}
-              style={{
-                height: `${(bar.value / 100) * 100}%`,
-                marginRight: array.length > 60 ? 0 : 1
-              }}
-            ></div>
+              className="relative flex-1 flex flex-col items-center"
+            >
+              <div
+                className={`w-full ${getBarColor(bar.state)} transition-all duration-200`}
+                style={{
+                  height: `${(bar.value / 100) * 100}%`,
+                  marginRight: array.length > 60 ? 0 : 1
+                }}
+              ></div>
+              {showValues && array.length <= 50 && (
+                <span 
+                  className={`absolute bottom-0 transform -rotate-45 text-xs ${darkMode ? 'text-white' : 'text-gray-600'}`}
+                  style={{ transformOrigin: 'left bottom', marginLeft: '4px' }}
+                >
+                  {bar.value}
+                </span>
+              )}
+            </div>
           ))}
         </div>
       </div>
