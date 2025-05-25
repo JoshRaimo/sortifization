@@ -258,15 +258,15 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ algorithm, darkMo
                   height: `${(bar.value / 100) * 100}%`,
                   marginRight: array.length > 60 ? 0 : 1
                 }}
-              ></div>
-              {showValues && array.length <= 50 && (
-                <span 
-                  className={`absolute bottom-0 transform -rotate-45 text-xs ${darkMode ? 'text-white' : 'text-gray-600'}`}
-                  style={{ transformOrigin: 'left bottom', marginLeft: '4px' }}
-                >
-                  {bar.value}
-                </span>
-              )}
+              >
+                {showValues && array.length <= 50 && (
+                  <div 
+                    className={`absolute w-full text-center -top-6 text-xs ${darkMode ? 'text-white' : 'text-gray-600'}`}
+                  >
+                    {bar.value}
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
